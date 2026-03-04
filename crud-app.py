@@ -40,6 +40,7 @@ st.title("📊 Google Sheets 讀寫測試儀表板")
 st.header("1️⃣ 目前資料列表")
 
 data = worksheet.get_all_records()
+
 if data:
     df = pd.DataFrame(data)
     # 為了方便對照，我們在畫面上加一個「試算表列數」的欄位
@@ -90,7 +91,8 @@ if data:
         # 讓使用者選擇要修改哪一筆
         selected_option_update = st.selectbox("選擇要修改的資料", options=list(row_options.keys()), key="update_select")
         selected_row_update = row_options[selected_option_update]
-       # 抓出該列目前的數值，用來預設填入修改表單
+
+        # 抓出該列目前的數值，用來預設填入修改表單
         current_data = data[selected_row_update - 2]
 
         with st.form("update_data_form"):
@@ -127,3 +129,4 @@ if data:
                 worksheet.delete_rows(selected_row_del)
             st.success("資料已成功刪除！")
             st.rerun()
+
